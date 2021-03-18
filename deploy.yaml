@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-svc
+  labels:
+    app: redis-client
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: redis-client
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis-client
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: redis-client
+    spec:
+      containers:
+      - name: redis-pod
+        image: krsnucc21/redis-client:0.3
+#        image: nigelpoulton/acg-web:0.1
+        ports:
+        - containerPort: 8080
