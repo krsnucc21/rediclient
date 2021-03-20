@@ -1,8 +1,9 @@
 #!/bin/bash
 
-URL=ac8d637fcb2b54eb49ea69420aa799ae-2044562349.us-east-1.elb.amazonaws.com:$PORT
+PORT=8080
+URL=a3e29c096919a4ee698c53c55ba2bf5a-895395087.us-east-1.elb.amazonaws.com:$PORT
 
-MAXCOUNT=10
+MAXCOUNT=1000000
 count=1
 
 while [ "$count" -le $MAXCOUNT ]
