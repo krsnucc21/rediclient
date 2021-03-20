@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: redis-deploy
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: redis-client
@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: redis-pod
-        image: krsnucc21/redis-client:0.3
+        image: krsnucc21/redis-client:0.4
 #        image: nigelpoulton/acg-web:0.1
         ports:
         - containerPort: 8080
