@@ -2,6 +2,7 @@ package db
 
 import (
    "fmt"
+   "strconv"
    "github.com/go-redis/redis/v8"
 )
 
@@ -54,4 +55,25 @@ func (db *Database) GetCellUser(cellname string) (*Userlist, error) {
       Users: users,
    }
    return userlist, nil
+}
+
+func (db *Database) GetNumLoop() int {
+   value, err := db.Client.Get(Ctx, "numloop").Result()
+   if err != nil {
+      return 0
+   }
+   num, err := strconv.Atoi(value)
+   if err != nil {
+      return 0
+   }
+   return num
+}
+
+func (db *Database) SetNumLoop(num int) error {
+   value := strconv.Itoa(num)
+   err := db.Client.Set(Ctx, "numloop", value, 0).Err()
+   if err != nil {
+      return err
+   }
+   return nil
 }

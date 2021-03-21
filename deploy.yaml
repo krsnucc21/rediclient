@@ -35,10 +35,10 @@ spec:
     spec:
       containers:
       - name: redis-pod
-        image: krsnucc21/redis-client:0.4
+        image: krsnucc21/redis-client:0.992
 #        image: nigelpoulton/acg-web:0.1
         ports:
         - containerPort: 8080
         resources:
           requests:
-            cpu: 0.2
+            cpu: 0.7
